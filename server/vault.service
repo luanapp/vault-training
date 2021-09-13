@@ -1,0 +1,21 @@
+[Unit]
+Description = Vault Server
+Requires = network-online.target
+After = network-online.target
+ConditionFileNotEmpty = /etc/vault/config.hcl
+
+[Service]
+User = vault
+Group = vault
+Restart = on-failure
+ExecStartPre=/bin/mkdir -p /var/lib/vault
+ExecStartPre=/bin/chown -R vault:vault /var/lib/vault
+ExecStart = /usr/local/bin/vault server -config=/etc/vault/config.hcl
+StandardOutput = /var/log/vault/output.log
+StandardError = /var/log/vault/error.log
+ExecReload = /bin/kill -HUP $MAINPID
+KillSignal = SIGTERM
+LimitMEMLOCK = infinite
+
+[Install]
+WantedBy = multi-user.target
