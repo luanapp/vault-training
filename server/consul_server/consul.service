@@ -10,9 +10,7 @@ PIDFile=/var/lib/consul/consul.pid
 PermissionsStartOnly=true
 ExecStartPre=/bin/mkdir -p /var/lib/consul
 ExecStartPre=/bin/chown -R consul:consul /var/lib/consul
-ExecStart=/usr/local/bin/consul agent \ 
-    -config-file=/etc/consul/consul.json \
-    -pid-file=/var/lib/consul/consul.pid
+ExecStart=/usr/local/bin/consul agent -config-file=/etc/consul/consul.json -pid-file=/var/lib/consul/consul.pid
 ExecReload=/bin/kill -HUP $MAINPID
 KillMode=process
 KillSignal=SIGTERM

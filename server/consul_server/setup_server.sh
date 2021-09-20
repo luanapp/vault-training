@@ -2,9 +2,9 @@
 
 # Install consul
 apt update && apt install -y curl
-culr -fsSL https://releases.hashicorp.com/consul/1.10.2/consul_1.10.2_linux_amd64.zip > consul.zip
+curl -fsSL https://releases.hashicorp.com/consul/1.10.2/consul_1.10.2_linux_amd64.zip > consul.zip
 unzip consul.zip
-mv consul /usr/local/consul
+mv consul /usr/local/bin/consul
 rm -rf consul.zip
 
 # Copy configuration files
