@@ -1,0 +1,42 @@
+---
+version: "3.9"
+
+services:
+  vault-1:
+    build:
+      context: ./docker/vault
+      dockerfile: Dockerfile
+    ports:
+      - 8200:8200
+    volumes:
+      - ./docker/vault/data:/vault/data
+      - ./docker/vault/logs:/vault/logs
+    networks:
+      vault-network:
+        ipv4_address: 172.16.12.12
+    depends_on:
+      - consul-1
+  
+  consul-1:
+    build:
+      context: ./docker/consul
+      dockerfile: Dockerfile
+    ports:
+      - 8300:8300
+      - 8400:8400
+      - 8500:8500
+      - 8600:8600
+    volumes:
+      - ./docker/consul/data:/consul/data
+      - ./docker/consul/logs:/consul/logs
+    networks:
+      vault-network:
+        ipv4_address: 172.16.12.21
+
+networks:
+  vault-network:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: "172.16.12.0/24"

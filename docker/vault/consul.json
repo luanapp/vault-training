@@ -1,0 +1,11 @@
+
+{
+  "server": false,
+  "node_name": "consul-client-01",
+  "datacenter": "dc1",
+  "data_dir": "/vault/data/consul/data",
+  "bind_addr": "172.16.12.12",
+  "client_addr": "127.0.0.1",
+  "retry_join": ["172.16.12.21"],
+  "log_level": "debug"
+}

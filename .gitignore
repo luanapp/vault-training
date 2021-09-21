@@ -1,0 +1,4 @@
+/docker/consul/data
+/docker/consul/logs
+/docker/vault/data
+/docker/vault/logs
