@@ -33,6 +33,24 @@ services:
       vault-network:
         ipv4_address: 172.16.12.21
 
+  consul-2:
+    build:
+      context: ./docker/consul
+      dockerfile: Dockerfile
+      args:
+        CONFIG_FILE: consul2.hcl
+    ports:
+      - 8301:8300
+      - 8401:8400
+      - 8501:8500
+      - 8601:8600
+    volumes:
+      - ./docker/consul/data2:/consul/data
+      - ./docker/consul/logs2:/consul/logs
+    networks:
+      vault-network:
+        ipv4_address: 172.16.12.111
+
 networks:
   vault-network:
     driver: bridge

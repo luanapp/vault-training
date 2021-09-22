@@ -17,6 +17,9 @@ RUN curl -fsSL https://releases.hashicorp.com/consul/1.10.2/consul_1.10.2_linux_
     mv consul /usr/local/bin/consul && \
     rm -rf consul.zip
 
+RUN mkdir /vault/data && \
+    mkdir /vault/logs
+
 COPY config.hcl .
 COPY consul.hcl .
 COPY entrypoint.sh .
