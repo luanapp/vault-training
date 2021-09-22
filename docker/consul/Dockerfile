@@ -12,7 +12,7 @@ RUN curl -fsSL https://releases.hashicorp.com/consul/1.10.2/consul_1.10.2_linux_
     mv consul /usr/local/bin/consul && \
     rm -rf consul.zip
 
-COPY consul.json .
+COPY consul.hcl .
 COPY entrypoint.sh .
 
 EXPOSE 8300 8400 8500 8600 8301

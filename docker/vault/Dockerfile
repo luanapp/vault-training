@@ -18,9 +18,9 @@ RUN curl -fsSL https://releases.hashicorp.com/consul/1.10.2/consul_1.10.2_linux_
     rm -rf consul.zip
 
 COPY config.hcl .
-COPY consul.json .
+COPY consul.hcl .
 COPY entrypoint.sh .
 
-EXPOSE 8300
+EXPOSE 8200 8300 8500
 
 ENTRYPOINT [ "./entrypoint.sh" ]
