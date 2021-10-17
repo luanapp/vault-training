@@ -16,6 +16,26 @@ services:
         ipv4_address: 172.16.12.12
     depends_on:
       - consul-1
+      - consul-2
+
+  vault-2:
+    build:
+      context: ./docker/vault
+      dockerfile: Dockerfile
+      args:
+        CONFIG_FILE: config2.hcl
+        CONSUL_FILE: consul2.hcl
+    ports:
+      - 8201:8200
+    volumes:
+      - ./docker/vault/data2:/vault/data
+      - ./docker/vault/logs2:/vault/logs
+    networks:
+      vault-network:
+        ipv4_address: 172.16.12.126
+    depends_on:
+      - consul-1
+      - consul-2
   
   consul-1:
     build:
@@ -50,6 +70,24 @@ services:
     networks:
       vault-network:
         ipv4_address: 172.16.12.111
+
+  consul-3:
+    build:
+      context: ./docker/consul
+      dockerfile: Dockerfile
+      args:
+        CONFIG_FILE: consul3.hcl
+    ports:
+      - 8302:8300
+      - 8402:8400
+      - 8502:8500
+      - 8602:8600
+    volumes:
+      - ./docker/consul/data3:/consul/data
+      - ./docker/consul/logs3:/consul/logs
+    networks:
+      vault-network:
+        ipv4_address: 172.16.12.115
 
 networks:
   vault-network:

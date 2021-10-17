@@ -1,5 +1,8 @@
 FROM alpine:latest
 
+ARG CONFIG_FILE=config.hcl
+ARG CONSUL_FILE=consul.hcl
+
 WORKDIR /vault
 
 RUN apk --no-cache add \
@@ -20,8 +23,8 @@ RUN curl -fsSL https://releases.hashicorp.com/consul/1.10.2/consul_1.10.2_linux_
 RUN mkdir /vault/data && \
     mkdir /vault/logs
 
-COPY config.hcl .
-COPY consul.hcl .
+COPY ${CONFIG_FILE} ./config.hcl
+COPY ${CONSUL_FILE} ./consul.hcl
 COPY entrypoint.sh .
 
 EXPOSE 8200 8300 8500

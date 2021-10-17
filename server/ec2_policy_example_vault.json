@@ -5,6 +5,11 @@
       "Effect": "Allow",
       "Action": "ec2:*",
       "Resource": "*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": "s3:*",
+      "Resource": "*"
     }
   ]
 }

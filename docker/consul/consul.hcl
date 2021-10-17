@@ -7,7 +7,7 @@ bind_addr        = "0.0.0.0"
 client_addr      = "0.0.0.0"
 advertise_addr   = "172.16.12.21"
 bootstrap_expect = 2
-retry_join       = ["172.16.12.21", "172.16.12.111"]
+retry_join       = ["172.16.12.21", "172.16.12.111", "172.16.12.115"]
 
 ui_config = {
   enabled = true

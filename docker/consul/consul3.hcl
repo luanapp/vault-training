@@ -1,11 +1,11 @@
 server     = true
-node_name  = "consul-02"
+node_name  = "consul-3"
 datacenter = "dc1"
 data_dir   = "/consul/data"
 
 bind_addr        = "0.0.0.0"
 client_addr      = "0.0.0.0"
-advertise_addr   = "172.16.12.111"
+advertise_addr   = "172.16.12.115"
 bootstrap_expect = 2
 retry_join       = ["172.16.12.21", "172.16.12.111", "172.16.12.115"]
 
