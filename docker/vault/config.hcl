@@ -13,7 +13,7 @@ listener "tcp" {
 }
 
 ui       = true
-api_addr = "http:0.0.0.0:8200"
+api_addr = "http://0.0.0.0:8200"
 
 cluster_name  = "Giropops"
 disable_mlock = true

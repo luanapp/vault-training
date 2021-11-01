@@ -1,0 +1,44 @@
+version: "3.8"
+
+services:
+
+  server:
+    image: consul:1.10.3
+    volumes:
+      - consul_data:/consul/data
+    ports:
+      - 8600:8600
+      - 8500:8500
+      - 8300:8300
+      - 8301:8301
+      - 8302:8302
+    environment:
+      - CONSUL_LOCAL_CONFIG={"datacenter":"dc1", "server":true, "enable_debug":true, "disable_update_check":true, "primary_datacenter":"dc1", "acl":{"enabled":false,"default_policy":"deny","down_policy":"extend-cache", "tokens":{"agent":""}}}
+    command: "agent -server -bootstrap-expect 3 -ui -retry-join consul.cluster -bind '{{ GetInterfaceIP \"eth0\" }}' -client 0.0.0.0"
+    deploy:
+        replicas: 3
+    networks:
+      consul:
+        aliases:
+          - consul.cluster
+
+            #  client:
+            #    image: consul:1.10.3
+            #    ports:
+            #      - 8501:8500
+            #    environment:
+            #      - CONSUL_LOCAL_CONFIG={"leave_on_terminate":true, "datacenter":"dc1"}
+            #    command: "agent -retry-join consul.cluster -client 0.0.0.0 -bind '{{ GetInterfaceIP \"eth0\" }}'"
+            #    deploy:
+            #      replicas: 2
+            #    depends_on:
+            #      - server
+            #    networks:
+            #      consul:
+  
+volumes:
+  consul_data:
+
+networks:
+  consul:
+    external: true

@@ -1,0 +1,25 @@
+version: "3.7"
+
+services:
+  registry:
+    image: registry:2
+    ports:
+      - 5000:5000
+    deploy:
+      #mode: global
+      replicas: 1
+      update_config:
+        parallelism: 1
+        order: start-first
+      placement:
+        constraints: [node.role == manager]
+    networks:
+      - registry
+    volumes:
+      - registry-data:/var/lib/registry
+
+networks:
+  registry:
+
+volumes:
+  registry-data:
